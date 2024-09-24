@@ -88,6 +88,8 @@ jobs:
     docker:
       name: Containerization
       needs: [unit-testing, code-coverage]
+      permissions: 
+        packages: write
       runs-on: ubuntu-latest
       steps:
         - name: Checkout Repo
@@ -136,9 +138,7 @@ jobs:
             push: true
             tags: | 
               ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}   
-              ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}  
-            build-args: |
-              BUILDKIT_STEP_LOG_MAX_SIZE=10485760           
+              ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}             
 
 
 
